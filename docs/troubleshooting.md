@@ -284,23 +284,22 @@ how to run this Dockerfile from a webserver running on App Engine Flex (Node).
 
 ### Running on Alpine
 
-The [newest Chromium package](https://pkgs.alpinelinux.org/package/edge/community/x86_64/chromium) supported on Alpine is 73, which was corresponding to [Puppeteer v1.12.2](https://github.com/GoogleChrome/puppeteer/releases/tag/v1.12.2).
+The [newest Chromium package](https://pkgs.alpinelinux.org/package/v3.10/community/aarch64/chromium) supported on Alpine is 73, which was corresponding to [Puppeteer v1.12.2](https://github.com/GoogleChrome/puppeteer/releases/tag/v1.12.2).
 
 Example Dockerfile:
 
 ```Dockerfile
-FROM node:10-alpine
+FROM alpine:3.10
 
 # Installs latest Chromium (73) package.
-RUN apk update && apk upgrade && \
-    echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
-    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
-    apk add --no-cache \
-      chromium@edge=~73.0.3683.103 \
-      nss@edge \
-      freetype@edge \
-      harfbuzz@edge \
-      ttf-freefont@edge
+RUN apk add --no-cache \
+      chromium \
+      nss \
+      freetype \
+      harfbuzz \
+      ttf-freefont \
+      nodejs \
+      yarn 
 
 ...
 
